@@ -33,7 +33,7 @@ public class GameStatistics {
     }
 
     public double getMeanRounds() {
-        return totalRounds / numberOfGames;
+        return (double) totalRounds / numberOfGames;
     }
 
     public List<Double> getVictoryPercentByBehavior() {

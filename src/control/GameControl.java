@@ -64,7 +64,7 @@ public class GameControl {
                     int position = player.getPosition();
                     int newPosition = player.getPosition() + moves;
 
-                    if (newPosition > gameModel.getMapSize()) {
+                    if (newPosition > gameModel.getMapSize()) { // Player's completed a round +100 coins
                         player.addCoins(GameConstants.COINS_ROUND_MAP);
                     }
                     player.setPosition((moves + position) % gameModel.getMapSize()); //Makes a circle map
@@ -121,17 +121,6 @@ public class GameControl {
             properties.removeAll(properties);
         }
     }
-
-//    private int getPlayersPlaying() {
-//        int playersPlaying = 0;
-//        for (int i = 0; i < gameModel.getNumberOfPlayers(); i++) {
-//            if (gameModel.getPlayerAt(i).getCoins() >= 0) {
-//                playersPlaying++;
-//            }
-//        }
-//
-//        return playersPlaying;
-//    }
 
     private int getWinnerIndex() {
         int winner = 0;
