@@ -65,10 +65,10 @@ public class GameStatistics {
         bf.append(String.format("Número de turnos médio por partida: %.2f\n", getMeanRounds()));
 
         List<Double> victoryPercentByBehavior = getVictoryPercentByBehavior();
-        bf.append(String.format("Porcentagem de vitória IMPULSIVO: %.2f%%\n", victoryPercentByBehavior.get(0)));
-        bf.append(String.format("Porcentagem de vitória EXIGENTE: %.2f%%\n", victoryPercentByBehavior.get(1)));
-        bf.append(String.format("Porcentagem de vitória CAUTELOSO: %.2f%%\n", victoryPercentByBehavior.get(2)));
-        bf.append(String.format("Porcentagem de vitória ALEATÓRIO: %.2f%%\n", victoryPercentByBehavior.get(3)));
+        bf.append(String.format("Porcentagem de vitória IMPULSIVO: \t%.2f%%\n", victoryPercentByBehavior.get(0)));
+        bf.append(String.format("Porcentagem de vitória EXIGENTE: \t%.2f%%\n", victoryPercentByBehavior.get(1)));
+        bf.append(String.format("Porcentagem de vitória CAUTELOSO: \t%.2f%%\n", victoryPercentByBehavior.get(2)));
+        bf.append(String.format("Porcentagem de vitória ALEATÓRIO: \t%.2f%%\n", victoryPercentByBehavior.get(3)));
 
         bf.append(String.format("Comportamento mais vitorioso: %s", getTheMostWinner().getTypeString()));
 

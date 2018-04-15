@@ -5,6 +5,8 @@ import map.Property;
 import player.AbstractPlayer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -13,7 +15,9 @@ import java.util.List;
 public class GameModel {
 
     private Map map = new Map();
-    private List<AbstractPlayer> abstractPlayerList;
+//    private List<AbstractPlayer> abstractPlayerList;
+    private java.util.Map<Integer, AbstractPlayer> abstractPlayerMap;
+    private int playersPlaying;
 
     public GameModel() {
         init();
@@ -21,20 +25,30 @@ public class GameModel {
 
     public void init() {
         map.init();
-        AbstractPlayer.resetId();
-        abstractPlayerList = new ArrayList<>();
+//        AbstractPlayer.resetId();
+        abstractPlayerMap = new HashMap<>();
+        playersPlaying = 0;
     }
 
     public void addPlayer(AbstractPlayer abstractPlayer) {
-        abstractPlayerList.add(abstractPlayer);
+        abstractPlayerMap.put(abstractPlayer.getPlayerId(), abstractPlayer);
+        addPlayersPlaying(1);
     }
 
-    public AbstractPlayer getPlayerAt(int index) {
-        return abstractPlayerList.get(index);
+    public Iterator<AbstractPlayer> getPlayerIterator() {
+        return abstractPlayerMap.values().iterator();
     }
 
-    public int getNumberOfPlayers() {
-        return abstractPlayerList.size();
+    public AbstractPlayer getPlayerById(int playerId) {
+        return abstractPlayerMap.get(playerId);
+    }
+
+    public int getPlayersPlaying() {
+        return playersPlaying;
+    }
+
+    public void addPlayersPlaying(int value) {
+        playersPlaying += value;
     }
 
     public int getMapSize() {

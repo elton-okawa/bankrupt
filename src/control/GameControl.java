@@ -56,9 +56,9 @@ public class GameControl {
         AbstractPlayer player;
         Property property;
         while (round < GameConstants.MAX_NUMBER_OF_ROUNDS && !finished) {
-//            Iterator iterator = gameModel.getPlayerIterator();
-            for (int playerNumber = 0; playerNumber < gameModel.getNumberOfPlayers(); playerNumber++) {
-                player = gameModel.getPlayerAt(playerNumber);
+            Iterator<AbstractPlayer> playerIterator = gameModel.getPlayerIterator();
+            while (playerIterator.hasNext()){
+                player = playerIterator.next();
                 if (player.getCoins() >= 0) { //The player is still in the game
                     moves = SingletonRandom.getInstance().nextInt(GameConstants.MIN_MOVES, GameConstants.MAX_MOVES + 1);
                     int position = player.getPosition();
@@ -73,7 +73,7 @@ public class GameControl {
                     if (property.hasOwner()) {
                         int rent = property.getRent();
                         player.addCoins(-rent); // Subtract rent
-                        gameModel.getPlayerAt(property.getOwnerId()).addCoins(rent);
+                        gameModel.getPlayerById(property.getOwnerId()).addCoins(rent);
 
                         checkPlayerBankruptcy(player);
                     } else {
@@ -92,13 +92,14 @@ public class GameControl {
             if (GameConstants.LOG_CONFIG) {
                 if (round % 10 == 0) {
                     System.out.println(String.format("Round: %d", round));
-                    for (int i = 0; i < gameModel.getNumberOfPlayers(); i++) {
-                        System.out.println(gameModel.getPlayerAt(i));
+                    Iterator<AbstractPlayer> iterator = gameModel.getPlayerIterator();
+                    while(iterator.hasNext()) {
+                        System.out.println(iterator.next());
                     }
                 }
             }
 
-            finished = (getPlayersPlaying() <= 1);
+            finished = (gameModel.getPlayersPlaying() <= 1);
             round++;
         }
 
@@ -112,6 +113,7 @@ public class GameControl {
 
     private void checkPlayerBankruptcy(AbstractPlayer abstractPlayer) {
         if (abstractPlayer.getCoins() < 0) {
+            gameModel.addPlayersPlaying(-1);
             List<Property> properties = abstractPlayer.getProperties();
             for (int i = 0; i < properties.size(); i++) {
                 properties.get(i).setOwnerId(GameConstants.NO_OWNER);
@@ -120,23 +122,30 @@ public class GameControl {
         }
     }
 
-    private int getPlayersPlaying() {
-        int playersPlaying = 0;
-        for (int i = 0; i < gameModel.getNumberOfPlayers(); i++) {
-            if (gameModel.getPlayerAt(i).getCoins() >= 0) {
-                playersPlaying++;
-            }
-        }
-
-        return playersPlaying;
-    }
+//    private int getPlayersPlaying() {
+//        int playersPlaying = 0;
+//        for (int i = 0; i < gameModel.getNumberOfPlayers(); i++) {
+//            if (gameModel.getPlayerAt(i).getCoins() >= 0) {
+//                playersPlaying++;
+//            }
+//        }
+//
+//        return playersPlaying;
+//    }
 
     private int getWinnerIndex() {
         int winner = 0;
-        for (int i = 1; i < gameModel.getNumberOfPlayers(); i++) {
-            if (gameModel.getPlayerAt(i).getCoins() > gameModel.getPlayerAt(winner).getCoins()) {
-                winner = i;
+        int position = 1;
+        Iterator<AbstractPlayer> playerIterator = gameModel.getPlayerIterator();
+        AbstractPlayer player = playerIterator.next();
+        AbstractPlayer another;
+        while (playerIterator.hasNext()) {
+            another = playerIterator.next();
+            if (another.getCoins() > player.getCoins()) {
+                winner = position;
+                player = another;
             }
+            position++;
         }
         return winner;
     }
