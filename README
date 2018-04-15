@@ -1,7 +1,30 @@
 Compilado usando JAVA 8, versão "1.8.0_91"
 
+Requerimentos: 
+Ant: https://ant.apache.org/bindownload.cgi 
+ou
+Intelijj Idea: https://www.jetbrains.com/idea/
+
 Para executar:
 1. Extraia os arquivos
 2. Acesse o diretório "bankrupt" e abra o terminal nele
-3. 
+3. Caso tenha o Ant, pule para o passo 4.1.
+   Caso tenha o Intelijj Idea, pule para o passo 4.2.
+
+4.1 Digite:
+
+ant run
+
+4.2 Abra o projeto no Intelijj Idea e execute.
+
+5. Verifique a saída do programa.
+
+Extra 1: Caso queira verificar o status do jogo a cada 10 rounds, 
+acesse o arquivo java src/utils/GameConstants.java, modifique
+a variável "LOG_CONFIG" para "true" e execute o passo 3 novamente.
+
+Extra 2: Caso queira modificar algum outro valor do jogo, 
+acesse o arquivo java src/utils/GameConstants.java, modifique
+a variável e execute o passo 3 novamente.
+
 

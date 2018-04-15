@@ -1,7 +1,5 @@
 package utils;
 
-import com.sun.corba.se.impl.oa.poa.POAPolicyMediatorImpl_NR_USM;
-
 /**
  * Created by e11even on 14/04/18.
  */
@@ -9,7 +7,7 @@ public enum PlayerType {
     IMPULSIVE (0, "Impulsivo"),
     DEMANDING (1, "Exigente"),
     CAUTIOUS (2, "Cauteloso"),
-    RANDOM (3, "Aleatório");
+    RANDOM (3, "Aleatorio");
 
     private int type;
     private String typeString;

@@ -61,14 +61,14 @@ public class GameStatistics {
     @Override
     public String toString() {
         StringBuffer bf = new StringBuffer();
-        bf.append(String.format("Número de partidas finalizada por TIMEOUT: %d\n", getTimeOutGames()));
-        bf.append(String.format("Número de turnos médio por partida: %.2f\n", getMeanRounds()));
+        bf.append(String.format("Numero de partidas finalizada por TIMEOUT: %d\n", getTimeOutGames()));
+        bf.append(String.format("Numero de turnos medio por partida: %.2f\n", getMeanRounds()));
 
         List<Double> victoryPercentByBehavior = getVictoryPercentByBehavior();
-        bf.append(String.format("Porcentagem de vitória IMPULSIVO: \t%.2f%%\n", victoryPercentByBehavior.get(0)));
-        bf.append(String.format("Porcentagem de vitória EXIGENTE: \t%.2f%%\n", victoryPercentByBehavior.get(1)));
-        bf.append(String.format("Porcentagem de vitória CAUTELOSO: \t%.2f%%\n", victoryPercentByBehavior.get(2)));
-        bf.append(String.format("Porcentagem de vitória ALEATÓRIO: \t%.2f%%\n", victoryPercentByBehavior.get(3)));
+        bf.append(String.format("Porcentagem de vitoria IMPULSIVO: \t%.2f%%\n", victoryPercentByBehavior.get(0)));
+        bf.append(String.format("Porcentagem de vitoria EXIGENTE: \t%.2f%%\n", victoryPercentByBehavior.get(1)));
+        bf.append(String.format("Porcentagem de vitoria CAUTELOSO: \t%.2f%%\n", victoryPercentByBehavior.get(2)));
+        bf.append(String.format("Porcentagem de vitoria ALEATORIO: \t%.2f%%\n", victoryPercentByBehavior.get(3)));
 
         bf.append(String.format("Comportamento mais vitorioso: %s", getTheMostWinner().getTypeString()));
 

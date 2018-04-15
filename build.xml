@@ -1,0 +1,14 @@
+<project default="compile">
+    <target name="compile">
+        <mkdir dir="out/production/tapps"/>
+        <javac srcdir="src" destdir="out/production/tapps" includeantruntime="false"/>
+    </target>
+
+    <target name="run" depends="compile">
+        <java classname="Main" fork="true">
+        	<classpath>
+            	<path location="out/production/tapps" />
+        	</classpath>
+        </java>
+    </target>
+</project>
