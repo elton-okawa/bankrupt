@@ -1,6 +1,6 @@
 package player.factory;
 
-import player.Player;
+import player.AbstractPlayer;
 import player.behavior.ImpulsiveBehavior;
 
 /**
@@ -8,7 +8,7 @@ import player.behavior.ImpulsiveBehavior;
  */
 public class ImpulsivePlayerFactory implements PlayerFactory{
     @Override
-    public Player createPlayer() {
-        return new ImpulsivePlayer(new ImpulsiveBehavior());
+    public AbstractPlayer createPlayer() {
+        return new Player(new ImpulsiveBehavior());
     }
 }

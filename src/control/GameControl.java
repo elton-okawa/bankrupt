@@ -2,9 +2,8 @@ package control;
 
 import map.Property;
 import model.GameModel;
-import player.factory.ImpulsivePlayerFactory;
-import player.Player;
-import player.factory.PlayerFactory;
+import player.factory.*;
+import player.AbstractPlayer;
 import utils.*;
 
 import java.io.BufferedReader;
@@ -13,6 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -24,9 +24,9 @@ public class GameControl {
     private GameStatistics gameStatistics = new GameStatistics();
     private List<PlayerFactory> playerFactories = new ArrayList<>(Arrays.asList(
             new ImpulsivePlayerFactory(),
-            new ImpulsivePlayerFactory(),
-            new ImpulsivePlayerFactory(),
-            new ImpulsivePlayerFactory()
+            new DemandingPlayerFactory(),
+            new CautiousPlayerFactory(),
+            new RandomPlayerFactory()
     ));
 
     public GameControl(String configName) throws IOException {
@@ -53,9 +53,10 @@ public class GameControl {
         int round = 0;
         boolean finished = false;
         DecisionData decisionData = new DecisionData();
-        Player player;
+        AbstractPlayer player;
         Property property;
         while (round < GameConstants.MAX_NUMBER_OF_ROUNDS && !finished) {
+//            Iterator iterator = gameModel.getPlayerIterator();
             for (int playerNumber = 0; playerNumber < gameModel.getNumberOfPlayers(); playerNumber++) {
                 player = gameModel.getPlayerAt(playerNumber);
                 if (player.getCoins() >= 0) { //The player is still in the game
@@ -88,10 +89,12 @@ public class GameControl {
                 }
             }
 
-            if (round % 10 == 0) {
-                System.out.println(String.format("Round: %d", round));
-                for (int i = 0; i < gameModel.getNumberOfPlayers(); i++) {
-                    System.out.println(gameModel.getPlayerAt(i));
+            if (GameConstants.LOG_CONFIG) {
+                if (round % 10 == 0) {
+                    System.out.println(String.format("Round: %d", round));
+                    for (int i = 0; i < gameModel.getNumberOfPlayers(); i++) {
+                        System.out.println(gameModel.getPlayerAt(i));
+                    }
                 }
             }
 
@@ -107,9 +110,9 @@ public class GameControl {
         gameStatistics.addBehaviorWins(PlayerType.getPlayerByType(getWinnerIndex()));
     }
 
-    private void checkPlayerBankruptcy(Player player) {
-        if (player.getCoins() < 0) {
-            List<Property> properties = player.getProperties();
+    private void checkPlayerBankruptcy(AbstractPlayer abstractPlayer) {
+        if (abstractPlayer.getCoins() < 0) {
+            List<Property> properties = abstractPlayer.getProperties();
             for (int i = 0; i < properties.size(); i++) {
                 properties.get(i).setOwnerId(GameConstants.NO_OWNER);
             }
@@ -129,12 +132,13 @@ public class GameControl {
     }
 
     private int getWinnerIndex() {
-        for (int i = 0; i < gameModel.getNumberOfPlayers(); i++) {
-            if (gameModel.getPlayerAt(i).getCoins() >= 0) {
-                return i;
+        int winner = 0;
+        for (int i = 1; i < gameModel.getNumberOfPlayers(); i++) {
+            if (gameModel.getPlayerAt(i).getCoins() > gameModel.getPlayerAt(winner).getCoins()) {
+                winner = i;
             }
         }
-        return -1;
+        return winner;
     }
 
     @Override

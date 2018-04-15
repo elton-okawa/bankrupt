@@ -1,14 +1,14 @@
 package player.factory;
 
-import player.Player;
+import player.AbstractPlayer;
 import player.behavior.PlayBehavior;
 
 /**
  * Created by e11even on 14/04/18.
  */
-public class ImpulsivePlayer extends Player {
+public class Player extends AbstractPlayer {
 
-    public ImpulsivePlayer(PlayBehavior playBehavior) {
+    public Player(PlayBehavior playBehavior) {
         super(playBehavior);
     }
 }

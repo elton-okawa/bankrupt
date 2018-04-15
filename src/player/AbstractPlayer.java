@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by e11even on 13/04/18.
  */
-public abstract class Player {
+public abstract class AbstractPlayer {
 
     private static int globalId = 0;
 
@@ -22,7 +22,7 @@ public abstract class Player {
     private int coins;
     private List<Property> properties;
 
-    public Player(PlayBehavior playBehavior) {
+    public AbstractPlayer(PlayBehavior playBehavior) {
         this.id = globalId++;
         init();
         setPlayBehavior(playBehavior);
@@ -84,6 +84,10 @@ public abstract class Player {
 
     public List<Property> getProperties() {
         return properties;
+    }
+
+    public static void resetId() {
+        globalId = 0;
     }
 
     @Override

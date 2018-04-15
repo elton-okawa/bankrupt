@@ -5,6 +5,8 @@ package utils;
  */
 public class GameConstants {
 
+    public static final boolean LOG_CONFIG = false;
+
     public static final int NUMBER_OF_GAMES = 300;
     public static final int MAX_NUMBER_OF_ROUNDS = 1000;
     public static final int DEFAULT_POSITION = 0;

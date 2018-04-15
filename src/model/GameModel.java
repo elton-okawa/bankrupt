@@ -2,7 +2,7 @@ package model;
 
 import map.Map;
 import map.Property;
-import player.Player;
+import player.AbstractPlayer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.List;
 public class GameModel {
 
     private Map map = new Map();
-    private List<Player> playerList;
+    private List<AbstractPlayer> abstractPlayerList;
 
     public GameModel() {
         init();
@@ -21,19 +21,20 @@ public class GameModel {
 
     public void init() {
         map.init();
-        playerList = new ArrayList<>();
+        AbstractPlayer.resetId();
+        abstractPlayerList = new ArrayList<>();
     }
 
-    public void addPlayer(Player player) {
-        playerList.add(player);
+    public void addPlayer(AbstractPlayer abstractPlayer) {
+        abstractPlayerList.add(abstractPlayer);
     }
 
-    public Player getPlayerAt(int index) {
-        return playerList.get(index);
+    public AbstractPlayer getPlayerAt(int index) {
+        return abstractPlayerList.get(index);
     }
 
     public int getNumberOfPlayers() {
-        return playerList.size();
+        return abstractPlayerList.size();
     }
 
     public int getMapSize() {
