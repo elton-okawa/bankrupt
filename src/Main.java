@@ -10,6 +10,7 @@ public class Main {
 
     public static void main (String args[]) throws IOException {
         GameControl gameControl = new GameControl(GameConstants.GAME_CONFIG_FILE_NAME);
+        gameControl.startGame();
         System.out.println(gameControl);
     }
 }

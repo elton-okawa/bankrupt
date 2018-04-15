@@ -1,4 +1,4 @@
-package player;
+package player.behavior;
 
 import utils.DecisionData;
 

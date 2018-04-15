@@ -1,6 +1,7 @@
 package player;
 
 import map.Property;
+import player.behavior.PlayBehavior;
 import utils.DecisionData;
 import utils.GameConstants;
 

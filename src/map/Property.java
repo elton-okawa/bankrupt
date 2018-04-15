@@ -43,7 +43,7 @@ public class Property {
 
     @Override
     public String toString() {
-        return String.format("Property: price: %d, rent: %d, ownerId: %d\n", price, rent, ownerId);
+        return String.format("Property: price: %d, rent: %d, ownerId: %d", price, rent, ownerId);
     }
 }
 

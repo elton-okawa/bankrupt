@@ -2,9 +2,9 @@ package control;
 
 import map.Property;
 import model.GameModel;
-import player.ImpulsivePlayerFactory;
+import player.factory.ImpulsivePlayerFactory;
 import player.Player;
-import player.PlayerFactory;
+import player.factory.PlayerFactory;
 import utils.*;
 
 import java.io.BufferedReader;
@@ -39,7 +39,7 @@ public class GameControl {
         String line;
         String[] arguments;
         while ((line = bf.readLine()) != null) {
-            arguments = line.split(" ");
+            arguments = line.split("\\s+");
             gameModel.addProperty(new Property(Integer.valueOf(arguments[0]), Integer.valueOf(arguments[1])));
         }
 
@@ -87,6 +87,14 @@ public class GameControl {
                     }
                 }
             }
+
+            if (round % 10 == 0) {
+                System.out.println(String.format("Round: %d", round));
+                for (int i = 0; i < gameModel.getNumberOfPlayers(); i++) {
+                    System.out.println(gameModel.getPlayerAt(i));
+                }
+            }
+
             finished = (getPlayersPlaying() <= 1);
             round++;
         }
@@ -105,6 +113,7 @@ public class GameControl {
             for (int i = 0; i < properties.size(); i++) {
                 properties.get(i).setOwnerId(GameConstants.NO_OWNER);
             }
+            properties.removeAll(properties);
         }
     }
 

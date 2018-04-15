@@ -21,6 +21,7 @@ public class SingletonRandom {
         return singletonRandom;
     }
 
+    // Start inclusive, end exclusive [start, end[
     public int nextInt(int start, int end) {
         return random.nextInt(end - start) + start;
     }
