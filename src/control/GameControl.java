@@ -42,7 +42,7 @@ public class GameControl {
             arguments = line.split("\\s+");
             gameModel.addProperty(new Property(Integer.valueOf(arguments[0]), Integer.valueOf(arguments[1])));
         }
-
+        AbstractPlayer.resetId();
         for (int i = 0; i < playerFactories.size(); i++) {
             gameModel.addPlayer(playerFactories.get(i).createPlayer());
         }
@@ -71,11 +71,13 @@ public class GameControl {
 
                     property = gameModel.getPropertyAt(player.getPosition());
                     if (property.hasOwner()) {
-                        int rent = property.getRent();
-                        player.addCoins(-rent); // Subtract rent
-                        gameModel.getPlayerById(property.getOwnerId()).addCoins(rent);
+                        if (property.getOwnerId() != player.getPlayerId()) { //The player is not the owner
+                            int rent = property.getRent();
+                            player.addCoins(-rent); // Subtract rent
+                            gameModel.getPlayerById(property.getOwnerId()).addCoins(rent);
 
-                        checkPlayerBankruptcy(player);
+                            checkPlayerBankruptcy(player);
+                        }
                     } else {
                         decisionData.setPrice(property.getPrice());
                         decisionData.setRent(property.getRent());

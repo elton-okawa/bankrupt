@@ -1,9 +1,17 @@
 Compilado usando JAVA 8, versão "1.8.0_91"
 
 Requerimentos: 
+Java 8
 Ant: https://ant.apache.org/bindownload.cgi 
 ou
 Intelijj Idea: https://www.jetbrains.com/idea/
+
+Observações:
+- Classe executável: Main
+	- src/Main.java
+	- out/production/tapps/Main.class
+- Path fontes: src/
+- Path compilados: out/production/tapps
 
 Para executar:
 1. Extraia os arquivos
